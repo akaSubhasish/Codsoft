@@ -1,0 +1,191 @@
+
+package javanumbergame;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+
+
+
+public class StudentGradeCalculator extends JFrame{
+    JTextField text;
+    int subjects=0;
+    int sum;
+    
+    JButton marks;
+    JButton percentage;
+    JButton grades;
+    JButton next;
+    JButton reset;
+    
+    float tmarks;
+    float per;
+    String g;
+    
+    JLabel msg;
+    JLabel result;
+    
+    public StudentGradeCalculator(){
+        sum=0;
+        setSize(600,600);
+        setLocation(450,150);
+        setTitle("Student Grade Calculator");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        
+        msg = new JLabel("Enter The Marks Of Each Subjects");
+        msg.setFont(new Font("Osward",Font.BOLD,20));
+        msg.setBounds(125, 60,500,40);
+        msg.setForeground(Color.BLACK);
+        add(msg);
+        
+        result= new JLabel("");
+        result.setBounds(150, 300, 400, 100);
+        add(result);
+        
+        
+        text= new JTextField();
+        text.setBounds(165, 100,250, 30);
+        add(text);
+        
+        next= new JButton("Next");
+        next.setBounds(245, 170, 100, 30);
+        next.setBackground(Color.BLACK);
+        next.setForeground(Color.WHITE);
+        add(next);
+        
+        marks= new JButton("Total Marks");
+        marks.setBounds(150, 250, 100, 30);
+        marks.setBackground(Color.BLACK);
+        marks.setForeground(Color.WHITE);
+        add(marks);
+        
+        percentage= new JButton("Percentage");
+        percentage.setBounds(340, 250, 100, 30);
+        percentage.setBackground(Color.BLACK);
+        percentage.setForeground(Color.WHITE);
+        add(percentage);
+        
+        reset= new JButton("Reset");
+        reset.setBounds(245, 380, 100, 30);
+        reset.setBackground(Color.BLACK);
+        reset.setForeground(Color.WHITE);
+        add(reset);
+        
+        grades= new JButton("Grades");
+        grades.setBounds(150, 300, 294, 30);
+        grades.setBackground(Color.BLACK);
+        grades.setForeground(Color.WHITE);
+        add(grades);
+        
+        next.addActionListener(new ActionListener(){
+            public void actionPerformed( ActionEvent ae){
+                try{
+                subjects++;
+                int s= Integer.parseInt(text.getText());
+                sum=sum+s;
+                text.setText("");
+                
+                }catch(Exception e){
+                    System.out.println("Enter Valid Arguments");
+                }
+            }
+        });
+        
+        marks.addActionListener(new ActionListener(){
+            public void actionPerformed( ActionEvent ae){
+                try{
+                tmarks=sum;
+                result.setText("The Total Marks Are: "+tmarks);
+                result.setFont(new Font("Osward",Font.BOLD,15));
+                result.setForeground(Color.BLUE);
+      
+                               }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+        
+        percentage.addActionListener(new ActionListener(){
+            public void actionPerformed( ActionEvent ae){
+                try{
+                    int subT=subjects*100;
+                per=(tmarks/subT)*100;
+                result.setText("Your Percentage is: "+per+"%");
+                result.setFont(new Font("Osward",Font.BOLD,15));
+                result.setForeground(Color.BLUE);
+      
+                               }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+        
+        grades.addActionListener(new ActionListener(){
+            public void actionPerformed( ActionEvent ae){
+                try{
+                    g="";
+                    if(per>=93&&per<=100){g="A+";}
+                    else if(per>=90&&per<=92){
+                        g="A-";
+                    }
+                    else if(per>=87&&per<=89){
+                        g="B+";
+                    }
+                    else if(per>=83&&per<=86){
+                        g="B";
+                    }
+                    else if(per>=80&&per<=82){
+                        g="B-";
+                    }
+                    else if(per>=77&&per<=79){
+                        g="C+";
+                    }
+                    else if(per>=73&&per<=76){
+                        g="C";
+                    }
+                    else if(per>=70&&per<=72){
+                        g="C-";
+                    }
+                    else if(per>=67&&per<=69){
+                        g="D+";
+                    }
+                    else if(per>=65&&per<=66){
+                        g="D";
+                    }
+                    else if(per<65){
+                        g="F";
+                    }
+                result.setText("Your Grade is: "+g);
+                result.setFont(new Font("Osward",Font.BOLD,15));
+                result.setForeground(Color.BLUE);
+      
+                               }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+         reset.addActionListener(new ActionListener(){
+            public void actionPerformed( ActionEvent ae){
+                try{
+                tmarks=0;
+                per=0;
+                g="";
+                subjects=0;
+                sum=0;
+                result.setText("");
+      
+                               }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+        
+           setLayout(new BorderLayout(7,7));
+        setVisible(true);
+    }
+    
+    public static void main(String args[]){
+       new StudentGradeCalculator();
+    }
+}
